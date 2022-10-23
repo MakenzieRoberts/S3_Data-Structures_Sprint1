@@ -31,8 +31,8 @@ const getUserById = (request, response) => {
 	const id = parseInt(request.query.id); // This is the parameter method
 
 	pool.query(
-		"SELECT * FROM test_2022_09_08.users WHERE id = $1",
-		[id],
+		"SELECT * FROM test_2022_09_08.users",
+		// [id],
 		(error, results) => {
 			if (error) {
 				throw error;
@@ -43,13 +43,29 @@ const getUserById = (request, response) => {
 			// So if we want to display all messages nicely in the browser, we can use the .map() function to iterate through the array and display each property
 			console.log(test[0].id);
 
+			// !TODO: Maybe this is where the stack/queue functions should go? Like, we'll
+			// get rid of the "by id" parts so it returns all, and then we can use our
+			// stack/queue functions to sort the data to be displayed the data in the
+			// browser
+
 			// response.status(200).send(`Results: ${JSON.stringify(results.rows)}`);
-			response.status(200).send(
-				`<b>Results:</b> <br>
-			 	 	ID: 		${JSON.stringify(test[0].id)} <br>
-				 	Name: 		${JSON.stringify(test[0].name)} <br>
-				 	Course Id: 	${JSON.stringify(test[0].course_id)}`
-			);
+
+			// response.status(200).send(
+			// 	`<b>Results:</b> <br>
+			//  	 	ID: 		${JSON.stringify(test[0].id)} <br>
+			// 	 	Name: 		${JSON.stringify(test[0].name)} <br>
+			// 	 	Course Id: 	${JSON.stringify(test[0].course_id)}`
+			// );
+
+			// !TODO: Remember to hide the agent_id from the receiver! (?)
+			response
+				.status(200)
+				.send(
+					test.map(
+						(item) =>
+							`ID: ${item.id}, NAME: ${item.name}, COURSE_ID: ${item.course_id}`
+					)
+				);
 		}
 	);
 };
