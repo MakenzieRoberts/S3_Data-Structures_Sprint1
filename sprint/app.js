@@ -25,6 +25,35 @@ const pool = new Pool({
 	port: 5432,
 });
 
+const getUserById = (request, response) => {
+	// This will pull the id AND PARSE IT TO A NUMBER
+	// const id = parseInt(request.params.id); // This was for path mapping (users/1). we're changing it to param (users?id=1)
+	const id = parseInt(request.query.id); // This is the parameter method
+
+	pool.query(
+		"SELECT * FROM test_2022_09_08.users WHERE id = $1",
+		[id],
+		(error, results) => {
+			if (error) {
+				throw error;
+			}
+			// response.status(200).json(results.rows);
+			let test = results.rows;
+			// This console log is how we can access each individual property in the json object
+			// So if we want to display all messages nicely in the browser, we can use the .map() function to iterate through the array and display each property
+			console.log(test[0].id);
+
+			// response.status(200).send(`Results: ${JSON.stringify(results.rows)}`);
+			response.status(200).send(
+				`<b>Results:</b> <br>
+			 	 	ID: 		${JSON.stringify(test[0].id)} <br>
+				 	Name: 		${JSON.stringify(test[0].name)} <br>
+				 	Course Id: 	${JSON.stringify(test[0].course_id)}`
+			);
+		}
+	);
+};
+
 // // Add
 const createUser = (request, response) => {
 	// this is grabbing the name and email columns from the request body
@@ -43,6 +72,7 @@ const createUser = (request, response) => {
 	);
 };
 
+app.get("/view/", getUserById);
 app.post("/add", createUser);
 
 // app.post('/add', function(req,res){
