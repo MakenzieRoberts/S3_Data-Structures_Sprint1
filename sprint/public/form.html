@@ -12,23 +12,33 @@
 
 		<form action="/add" method="POST">
 			<fieldset>
-				<h3>Add new employee</h3>
-				<label>Employee ID</label>
+				<h3>Add new message</h3>
+				<label>Agent ID</label>
 				<input
 					type="text"
-					id="empID"
+					id="agent_id"
 					name="id"
 					placeholder="1,2,3..."
 					required
 				/>
 				<br /><br />
 
-				<label>Name</label>
+				<label>Data</label>
+				<textarea
+					type="text"
+					id="data"
+					name="data"
+					placeholder="Data"
+					required
+				></textarea>
+				<br /><br />
+
+				<label>Structure ID</label>
 				<input
 					type="text"
-					id="name"
-					name="name"
-					placeholder="Tom Cruise"
+					id="structure_id"
+					name="structure"
+					placeholder="Data"
 					required
 				/>
 				<br /><br />
@@ -39,13 +49,29 @@
 		</form>
 		<form action="/view" method="GET">
 			<fieldset>
-				<h3>View an employee</h3>
-				<label>Employee ID</label>
+				<h3>View a message</h3>
+
+				<label>Your Agent ID</label>
+				<br />
 				<input
 					type="text"
-					id="empID"
+					id="agent_id"
 					name="id"
-					placeholder="1,2,3..."
+					placeholder="Enter 1 for stack or 2 for queue"
+					required
+				/>
+				<br /><br />
+
+				<label
+					>Structure ID <br />
+					(1 = Stack, 2 = Queue)</label
+				>
+				<br />
+				<input
+					type="text"
+					id="structure_id"
+					name="structure"
+					placeholder="Enter 1 for stack or 2 for queue"
 					required
 				/>
 				<br /><br />
