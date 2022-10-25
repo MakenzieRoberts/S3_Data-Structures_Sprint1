@@ -29,7 +29,7 @@ const pool = new Pool({
 	port: 5432,
 });
 
-const getUserById = (request, response) => {
+const getMessage = (request, response) => {
 	// This will pull the id AND PARSE IT TO A NUMBER
 	// const id = parseInt(request.params.id); // This was for path mapping (users/1). we're changing it to param (users?id=1)
 	const retrieving_agent_id = request.query.id;
@@ -154,6 +154,7 @@ function deleteMessage(message_id) {
 			if (error) {
 				throw error;
 			}
+
 			// response.status(200).send(`User deleted with ID: ${id}`);
 		}
 	);
@@ -161,7 +162,7 @@ function deleteMessage(message_id) {
 }
 
 // // Add
-const createUser = (request, response) => {
+const addMessage = (request, response) => {
 	// this is grabbing the name and email columns from the request body
 	console.log(request.body);
 	const { id, data, structure } = request.body;
@@ -174,6 +175,7 @@ const createUser = (request, response) => {
 			if (error) {
 				throw error;
 			}
+			response.sendFile(path.join(__dirname, "./public/add.html"));
 			response
 				.status(201)
 				.send(
@@ -183,8 +185,8 @@ const createUser = (request, response) => {
 	);
 };
 
-app.get("/view/", getUserById);
-app.post("/add", createUser);
+app.get("/view/", getMessage);
+app.post("/add", addMessage);
 
 // app.post('/add', function(req,res){
 //   db.serialize(()=>{
