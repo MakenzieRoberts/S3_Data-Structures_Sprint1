@@ -9,7 +9,6 @@ var server = http.createServer(app);
 // import stack module
 const { handleStack } = require("./stack.js");
 const { handleQueue } = require("./queue.js");
-const { create } = require("domain");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "./public")));
