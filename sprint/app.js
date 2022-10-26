@@ -175,7 +175,6 @@ const addMessage = (request, response) => {
 			if (error) {
 				throw error;
 			}
-			response.sendFile(path.join(__dirname, "./public/add.html"));
 			response
 				.status(201)
 				.send(
