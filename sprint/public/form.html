@@ -3,17 +3,18 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="style.css" />
-		<title>My Form</title>
+		<title>Secret Database</title>
 	</head>
 	<body>
 		<header>
-			<h1>Employee Database</h1>
+			<h1>Secret Database</h1>
 		</header>
 
 		<form action="/add" method="POST">
 			<fieldset>
 				<h3>Add new message</h3>
-				<label>Agent ID</label>
+				<label>Your Agent ID</label>
+				<br />
 				<input
 					type="text"
 					id="agent_id"
@@ -24,6 +25,7 @@
 				<br /><br />
 
 				<label>Data</label>
+				<br />
 				<textarea
 					type="text"
 					id="data"
@@ -33,7 +35,7 @@
 				></textarea>
 				<br /><br />
 
-				<label>Structure ID</label>
+				<label>Structure ID<br />(1 = Stack, 2 = Queue)</label><br />
 				<input
 					type="text"
 					id="structure_id"

@@ -1,27 +1,40 @@
 body {
-	background-color: #cce6ff;
+	background-color: black;
+	margin: 0 auto;
 }
+
 header {
 	text-align: center;
-	height: 100px;
-	padding-top: 1px;
-	background-color: #3399ff;
-	color: #ffffff;
+	height: fit-content;
+	background-color: grey;
+	color: black;
 	font-size: x-large;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
 }
 
 h3 {
 	margin-top: 2px;
 	text-align: center;
-	background-color: #80bfff;
+	background-color: grey;
+	color: black;
 }
 
 form {
+	color: grey;
+	background-color: black;
 	width: 45%;
-	display: inline-block;
-	margin: 20px;
+	margin: 20px auto;
 }
 
+input,
+textarea {
+	background-color: black;
+	color: limegreen;
+}
 footer {
 	margin-top: 3%;
 	text-align: center;
