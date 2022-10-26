@@ -1,16 +1,13 @@
-var express = require("express");
-var http = require("http");
-var path = require("path");
-var bodyParser = require("body-parser");
-// const db = require("./db/queries");
+const express = require("express");
 
-var app = express();
-var server = http.createServer(app);
+const path = require("path");
+
+const app = express();
+
 // import stack module
 const { handleStack } = require("./stack.js");
 const { handleQueue } = require("./queue.js");
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "./public")));
 
 // db.run('CREATE TABLE IF NOT EXISTS emp(id TEXT, name TEXT)');
@@ -94,14 +91,14 @@ const getMessage = (request, response) => {
 					const message_id = parsedResult.message_id;
 					const retrieved_data = parsedResult.data;
 
-					// ADD TO RETRIEVALS TABLE
+					// Add to retrievals table (archive message before deletion)
 					addRetrieval(retrieving_agent_id, retrieved_data, structure);
 
-					// SEND RESPONSE
+					// Send response
 					response.status(200).send(`DATA: ${parsedResult.data}`);
 					console.log("Message data displayed in browser: ", parsedResult.data);
 
-					// DELETE FROM MESSAGES TABLE
+					// Delete from messages table
 					deleteMessage(message_id);
 
 					response.end();
@@ -185,6 +182,4 @@ const addMessage = (request, response) => {
 app.get("/view/", getMessage);
 app.post("/add", addMessage);
 
-server.listen(3000, function () {
-	console.log("server is listening on port: 3000");
-});
+app.listen(3000, () => console.log(`Server running on port 3000.`));
