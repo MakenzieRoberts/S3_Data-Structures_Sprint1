@@ -132,7 +132,6 @@ const getMessage = (request, response) => {
 	);
 };
 
-// OLD before making one with request and response
 function addRetrieval(retrieving_agent_id, retrieved_data, structure) {
 	pool.query(
 		"INSERT INTO secret.retrievals (retrieving_agent_id, retrieved_data, retrieval_structure_id) VALUES ($1, $2, $3)",
