@@ -68,7 +68,12 @@ function handleQueue(records) {
 		queueObject.enqueue(JSON.stringify(records[i]));
 	}
 
-	return queueObject.dequeue();
+	if (queueObject.isEmpty()) {
+		console.log("Queue is empty.");
+		return null;
+	} else {
+		return queueObject.dequeue();
+	}
 }
 
 module.exports = {
