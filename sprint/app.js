@@ -31,20 +31,17 @@ const addMessage = (request, response) => {
 				if (error) {
 					throw error;
 				}
-				response
-					.status(201)
-					.send(
-						`Message added with Agent ID: ${id}, Data: ${data}, Structure: ${structure}`
-					);
+				response.end(
+					`Message added with Agent ID: ${id}, Data: ${data}, Structure: ${structure}`
+				);
 			}
 		);
 	} else {
 		// If the data structure is not 1 or 2, send an error message to the user.
-		response
-			.status(200)
-			.send(`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`);
+		response.end(
+			`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
+		);
 	}
-	response.end();
 };
 
 // This function grabs user input and retrieves appropriate record from the messages
@@ -96,7 +93,7 @@ const getMessage = (request, response) => {
 				// them know there was no data found in that structure.
 				if (stackResult === null) {
 					console.log("No data found in structure 1");
-					response.status(200).send("No data found in structure 1.");
+					response.end("No data found in structure 1.");
 				} else {
 					// If the result is not null, and therefore contains data, we continue
 					// on and parse the data into a JSON object so we can access the
@@ -117,15 +114,15 @@ const getMessage = (request, response) => {
 					// This function adds the record to the retrievals table for archival purposes
 					addRetrieval(retrieving_agent_id, retrieved_data, structure);
 
-					// Send response back to the user containing the data they retrieved (while omitting sending agent id)
-					response.status(200).send(`Data retrieved: ${parsedResult.data}`);
-					console.log(
-						"Message data displayed in browser: '" + parsedResult.data + "'"
-					);
-
 					// Lastly, we call our delete function and pass it the message_id to
 					// delete the record from the messages table.
 					deleteMessage(message_id);
+
+					// Send response back to the user containing the data they retrieved (while omitting sending agent id)
+					response.end(`Data retrieved: ${parsedResult.data}`);
+					console.log(
+						"Message data displayed in browser: '" + parsedResult.data + "'"
+					);
 				}
 				// This does the same thing as above but with the queue function
 			} else if (structure === 2) {
@@ -134,7 +131,7 @@ const getMessage = (request, response) => {
 				let queueResult = handleQueue(records);
 				if (queueResult === null) {
 					console.log("No data found in structure 2");
-					response.status(200).send("No data found in structure 2.");
+					response.end("No data found in structure 2.");
 				} else {
 					// Parse the result of the queue function
 					let parsedResult = JSON.parse(queueResult);
@@ -146,25 +143,24 @@ const getMessage = (request, response) => {
 					// Archive the record in the retrievals table
 					addRetrieval(retrieving_agent_id, retrieved_data, structure);
 
-					// Send the data to the user
-					response.status(200).send(`Data retrieved:  ${parsedResult.data}`);
-					console.log("Message data displayed in browser: ", parsedResult.data);
-
 					// Delete the record from the messages table
 					deleteMessage(message_id);
+
+					// Send response back to the user containing the data they retrieved (while omitting sending agent id)
+					response.end(`Data retrieved: ${parsedResult.data}`);
+					console.log(
+						"Message data displayed in browser: '" + parsedResult.data + "'"
+					);
 				}
 				// If the structure is neither 1 or 2, it means that an invalid structure
 				// ID was entered, so we send an error message to the user.
 			} else {
-				response
-					.status(200)
-					.send(
-						`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
-					);
+				response.end(
+					`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
+				);
 			}
 		}
 	);
-	response.end();
 };
 
 // This function adds the record to the retrievals table for archival purposes
