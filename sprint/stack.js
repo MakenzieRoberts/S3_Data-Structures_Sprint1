@@ -72,7 +72,7 @@ function handleStack(records) {
 	// automatically whenever a new record is added - so they are in the same order they
 	// were submitted. Therefore, we can just iterate through the records and push them
 	// onto the stack.
-	for (var i in records) {
+	for (let i in records) {
 		stackObject.push(JSON.stringify(records[i]));
 	}
 

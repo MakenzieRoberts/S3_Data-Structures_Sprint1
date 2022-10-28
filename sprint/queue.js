@@ -71,7 +71,7 @@ function handleQueue(records) {
 	// Loop through the records and add them to the queue. Our records are stored in the same
 	// order they were submitted. Therefore, we can just iterate through the records and
 	// add them to the queue in the order.
-	for (var i in records) {
+	for (let i in records) {
 		queueObject.enqueue(JSON.stringify(records[i]));
 	}
 
