@@ -1,5 +1,3 @@
-//1. push(), 2.pop(),3.peek(),4.isEmpty(),5.size() 6. clear().7.toString()
-
 class Stack {
 	constructor() {
 		this.items = [];
@@ -31,19 +29,24 @@ class Stack {
 		return this.items[this.count - 1];
 	}
 
+	// Returns true or false depending on if the stack is empty
 	isEmpty() {
 		return this.count == 0 ? true : false;
 	}
 
+	// Returns a count of all elements in the stack
 	size() {
 		console.log(`${this.count} elements in stack`);
 		return this.count;
 	}
 
+	// Removes all elements from the stack
 	clear() {
 		this.items = [];
 		this.count = 0;
 	}
+
+	// Returns a string representation of the stack
 	toString() {
 		if (this.isEmpty) {
 			return "";
@@ -57,20 +60,24 @@ class Stack {
 }
 
 function handleStack(records) {
-	console.log("Stack function executed.");
-	// This function will return the most recent message
+	// This function is called when the user chooses '1' as the data structure ID they'd
+	// like to receive the data from. Only the records that have a data structure ID of 1
+	// will be passed to this function - Which will then be used to create a stack.
 
+	// Stacks operate in a LIFO (Last In First Out) manner, so this function will return
+	// the most recent record with a structure ID of 1.
 	const stackObject = new Stack();
 
-	// Our records are stored by their message_id by default, so they are in the same
-	// order they were submitted. Therefore, we can just iterate through the records and
-	// push them onto the stack.
+	// Our records are stored by their message_id by default, and message_id increments
+	// automatically whenever a new record is added - so they are in the same order they
+	// were submitted. Therefore, we can just iterate through the records and push them
+	// onto the stack.
 	for (var i in records) {
 		stackObject.push(JSON.stringify(records[i]));
 	}
 
-	// Now to return the most recent message in the stack to the user we can just pop the
-	// top element off the stack and return it.
+	// Now to return the most recent message in the stack to the user we can pop the top
+	// element off the stack and return it.
 	if (stackObject.isEmpty()) {
 		console.log("Stack is empty.");
 		return null;

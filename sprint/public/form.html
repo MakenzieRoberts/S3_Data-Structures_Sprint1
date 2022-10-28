@@ -12,14 +12,14 @@
 
 		<form action="/add" method="POST">
 			<fieldset>
-				<h3>Add new message</h3>
+				<h2>Add new message</h2>
 				<label>Your Agent ID</label>
 				<br />
 				<input
 					type="text"
 					id="sender-id"
 					name="id"
-					placeholder="1,2,3..."
+					placeholder="Enter your agent ID (eg. 1, 2, 3)..."
 					required
 				/>
 				<br /><br />
@@ -30,17 +30,27 @@
 					type="text"
 					id="data"
 					name="data"
-					placeholder="Data"
+					placeholder="Enter your message..."
 					required
 				></textarea>
 				<br /><br />
 
-				<label>Structure ID<br />(1 = Stack, 2 = Queue)</label><br />
+				<label
+					>Structure ID<br />
+					<span class="structure-label-details"
+						><strong>Urgent Messages:</strong> Enter <b>1</b> to add this
+						message to the <b>stack</b>.
+						<br />
+						<strong>Non-critical messages:</strong> Enter <b>2</b> to add this
+						data to the <b>queue</b>.
+					</span></label
+				>
+				<br />
 				<input
 					type="text"
 					id="send-structure"
 					name="structure"
-					placeholder="Data"
+					placeholder="Enter 1 for stack or 2 for queue..."
 					required
 				/>
 				<br /><br />
@@ -51,7 +61,7 @@
 		</form>
 		<form action="/view" method="GET">
 			<fieldset>
-				<h3>View a message</h3>
+				<h2>View a message</h2>
 
 				<label>Your Agent ID</label>
 				<br />
@@ -59,21 +69,27 @@
 					type="text"
 					id="receiver-id"
 					name="id"
-					placeholder="Enter 1 for stack or 2 for queue"
+					placeholder="Enter your agent ID (eg. 1, 2, 3)..."
 					required
 				/>
 				<br /><br />
 
 				<label
-					>Structure ID <br />
-					(1 = Stack, 2 = Queue)</label
+					>Structure ID<br />
+					<span class="structure-label-details"
+						><strong>Urgent Messages:</strong> Enter <b>1</b> to receive a
+						message from the <b>stack</b>.
+						<br />
+						<strong>Non-critical messages:</strong> Enter <b>2</b> to receive a
+						message from the <b>queue</b>.
+					</span></label
 				>
 				<br />
 				<input
 					type="text"
 					id="receive-structure"
 					name="structure"
-					placeholder="Enter 1 for stack or 2 for queue"
+					placeholder="Enter 1 for stack or 2 for queue..."
 					required
 				/>
 				<br /><br />
@@ -82,51 +98,7 @@
 				<br /><br /><br />
 			</fieldset>
 		</form>
-		<!-- <form action="/update" method="POST">
-			<fieldset>
-				<h3>Update an employee</h3>
-				<label>Employee ID</label>
-				<input
-					type="text"
-					id="empID"
-					name="id"
-					placeholder="1,2,3..."
-					required
-				/>
-				<br /><br />
 
-				<label>New Name</label>
-				<input
-					type="text"
-					id="name"
-					name="name"
-					placeholder="Maverick"
-					required
-				/>
-				<br /><br />
-
-				<button type="reset">Reset</button>
-				<button type="submit">Submit</button>
-			</fieldset>
-		</form>
-		<form action="/delete" method="POST">
-			<fieldset>
-				<h3>Delete an employee</h3>
-				<label>Employee ID</label>
-				<input
-					type="text"
-					id="empID"
-					name="id"
-					placeholder="1,2,3..."
-					required
-				/>
-				<br /><br />
-
-				<button type="reset">Reset</button>
-				<button type="submit">Submit</button>
-				<br /><br /><br />
-			</fieldset>
-		</form> -->
 		<footer>
 			<hr />
 			<h4>
