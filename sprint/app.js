@@ -55,8 +55,8 @@ const getMessage = (request, response) => {
 	const structure = parseInt(request.query.structure);
 
 	// Logging the input values to the console
-	console.log("Retrieving agent ID:", retrieving_agent_id);
-	console.log("Structure:", structure);
+	console.log("\nRetrieving agent ID:", retrieving_agent_id);
+	console.log("Retrieval Structure:", structure);
 
 	// This if-statement makes sure the user is entering a valid data structure ID. If
 	// they enter anything other than 1 or 2, the response sent back is a string containing an error message.
@@ -77,86 +77,65 @@ const getMessage = (request, response) => {
 			// structure ID the user entered.
 			let records = results.rows;
 
-			// This console log is how we can access each individual property in the json object
-			// So if we want to display all messages nicely in the browser, we can use the .map() function to iterate through the array and display each property
-			console.log("Results rows: \n", records);
+			// This next if-statement checks structure type and then call the appropriate
+			// function. If the structure is 1, the stack function is called. If the
+			// structure is 2, the queue function is called.
 
-			// This if-statement checks structure type and then call the appropriate function.
-			// If the structure is 1, the stack function is called. If the structure is 2, the queue function is called.
+			// Initializing a variable to hold the record that is returned from the stack
+			// or queue function
+			let result;
+
 			if (structure === 1) {
 				console.log("Structure 1 (Stack) Selected");
 				// Assigning the result of our stack function to a variable
-				let stackResult = handleStack(records);
-
-				// The stack and queue functions are set up to return null if they are
-				// empty. If the result is null, we send a response to the user that lets
-				// them know there was no data found in that structure.
-				if (stackResult === null) {
-					console.log("No data found in structure 1");
-					response.end("No data found in structure 1.");
-				} else {
-					// If the result is not null, and therefore contains data, we continue
-					// on and parse the data into a JSON object so we can access the
-					// properties and use that information to archive and delete the
-					// correct record.
-
-					// Here we parse the result of the stack function into a JSON object so we can access the properties
-					let parsedResult = JSON.parse(stackResult);
-					console.log("Stack result:", parsedResult);
-
-					let message_id = parsedResult.message_id;
-					let retrieved_data = parsedResult.data;
-
-					// Before we send the response back to the user, we need to add the
-					// record to the retrievals table (to archive the deleted message) and
-					// delete the record from the messages table
-
-					// This function adds the record to the retrievals table for archival purposes
-					addRetrieval(retrieving_agent_id, retrieved_data, structure);
-
-					// Lastly, we call our delete function and pass it the message_id to
-					// delete the record from the messages table.
-					deleteMessage(message_id);
-
-					// Send response back to the user containing the data they retrieved (while omitting sending agent id)
-					response.end(`Data retrieved: ${parsedResult.data}`);
-					console.log(
-						"Message data displayed in browser: '" + parsedResult.data + "'"
-					);
-				}
-				// This does the same thing as above but with the queue function
+				result = handleStack(records);
 			} else if (structure === 2) {
+				// This does the same thing as above but with the queue function
 				console.log("Structure 2 (Queue) Selected");
 				// Assign result from the queue function to a variable
-				let queueResult = handleQueue(records);
-				if (queueResult === null) {
-					console.log("No data found in structure 2");
-					response.end("No data found in structure 2.");
-				} else {
-					// Parse the result of the queue function
-					let parsedResult = JSON.parse(queueResult);
-					console.log("Queue result:", parsedResult);
-
-					let message_id = parsedResult.message_id;
-					let retrieved_data = parsedResult.data;
-
-					// Archive the record in the retrievals table
-					addRetrieval(retrieving_agent_id, retrieved_data, structure);
-
-					// Delete the record from the messages table
-					deleteMessage(message_id);
-
-					// Send response back to the user containing the data they retrieved (while omitting sending agent id)
-					response.end(`Data retrieved: ${parsedResult.data}`);
-					console.log(
-						"Message data displayed in browser: '" + parsedResult.data + "'"
-					);
-				}
+				result = handleQueue(records);
+			} else {
 				// If the structure is neither 1 or 2, it means that an invalid structure
 				// ID was entered, so we send an error message to the user.
-			} else {
 				response.end(
 					`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
+				);
+			}
+
+			// The stack and queue functions are set up to return null if they are
+			// empty. If the result is null, we send a response to the user that lets
+			// them know there was no data found in that structure.
+			if (result === null) {
+				console.log("No data found in structure 1");
+				response.end("No data found in structure 1.");
+			} else {
+				// If the result is not null, and therefore contains data, we continue on
+				// and parse the data into a JSON object so we can access the properties
+				// and use that information to archive and delete the correct record.
+
+				// Here we parse the result of the stack function into a JSON object so we
+				// can access the properties
+				let parsedResult = JSON.parse(result);
+				console.log("Stack result:", parsedResult);
+
+				let message_id = parsedResult.message_id;
+				let retrieved_data = parsedResult.data;
+
+				// Before we send the response back to the user, we need to add the
+				// record to the retrievals table (to archive the deleted message) and
+				// delete the record from the messages table
+
+				// This function adds the record to the retrievals table for archival purposes
+				addRetrieval(retrieving_agent_id, retrieved_data, structure);
+
+				// Lastly, we call our delete function and pass it the message_id to
+				// delete the record from the messages table.
+				deleteMessage(message_id);
+
+				// Send response back to the user containing the data they retrieved (while omitting sending agent id)
+				response.end(`Data retrieved: ${parsedResult.data}`);
+				console.log(
+					"Message data displayed in browser: '" + parsedResult.data + "' \n"
 				);
 			}
 		}
