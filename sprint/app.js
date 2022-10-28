@@ -43,8 +43,8 @@ const addMessage = (request, response) => {
 		response
 			.status(200)
 			.send(`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`);
-		response.end();
 	}
+	response.end();
 };
 
 // This function grabs user input and retrieves appropriate record from the messages
@@ -126,8 +126,6 @@ const getMessage = (request, response) => {
 					// Lastly, we call our delete function and pass it the message_id to
 					// delete the record from the messages table.
 					deleteMessage(message_id);
-
-					response.end();
 				}
 				// This does the same thing as above but with the queue function
 			} else if (structure === 2) {
@@ -154,8 +152,6 @@ const getMessage = (request, response) => {
 
 					// Delete the record from the messages table
 					deleteMessage(message_id);
-
-					response.end();
 				}
 				// If the structure is neither 1 or 2, it means that an invalid structure
 				// ID was entered, so we send an error message to the user.
@@ -168,6 +164,7 @@ const getMessage = (request, response) => {
 			}
 		}
 	);
+	response.end();
 };
 
 // This function adds the record to the retrievals table for archival purposes
