@@ -192,8 +192,10 @@ app.post("/add", addMessage);
 
 // Server listening on port 3000
 app.listen(3000, function () {
-	console.log("\nServer is listening on port: 3000");
 	console.log(
-		"\nThe messages database will be empty when you first run the app.\nYou will need to add records to the messages table in order to test the app.\nThis way, you can test the stack and queue functions with your own data.\n"
+		"\nServer is listening on port: 3000\nTo stop the server, press CTRL + C"
+	);
+	console.log(
+		"\nThe messages database will be empty when you first run the app.\nYou will need to add records to the messages table in order to test the app.\nThis way, you can test the stack and queue functions with your own data.\n\nTo access the web form, go to http://localhost:3000/ in your browser.\n"
 	);
 });
