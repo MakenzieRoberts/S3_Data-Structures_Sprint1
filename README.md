@@ -16,9 +16,11 @@ Please note that when a new record is added to a certain data structure, it cann
 
 ### Setup
 
-1. First, the database needs to be restored locally. In pgAdmin, create a new database and restore it using the file ```Sprint1_Data-Structures_DB_Backup.sql```
+1. First, the database needs to be restored locally. In pgAdmin, create a new database named ```data-structures-sprint1```. (If you decide you choose a different name for the database, make sure to update the 'database' property in ```config.js``` with the name you've chosen.) 
 
-	Before you start the program, please note that you must first alter ```config.js``` to use your credentials. It is currently using the 'default' credentials used for PostgreSQL/pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
+	Then, restore it using the file ```Sprint1_Data-Structures_DB_Backup.sql```
+
+	Before you start the program, please note that you must first alter ```config.js``` to use your credentials. It is currently using the credentials used for PostgreSQL/pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
 
    In ```config.js```, replace these user and password properties with your PostgreSQL credentials between the double quotes, and save the file.
    
