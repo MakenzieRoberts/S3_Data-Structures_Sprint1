@@ -24,27 +24,32 @@ const addMessage = (request, response) => {
 	// Using the request body, we can access the data sent by the user to create a record and insert it into the messages table
 	let { id, data, structure } = request.body;
 
-	// If the data structure ID entered by the user is 1 or 2, continue on with the function.
-	if (structure == 1 || structure == 2) {
-		// The $ are binding our id, name and course_id variables. $1 = user the first
-		// variable, $2 = use the second, etc. So $1 = id value, $2 = name value, etc.
-		pool.query(
-			"INSERT INTO secret.messages (agent_id, data, structure_id) VALUES ($1, $2, $3)",
-			[id, data, structure],
-			(error, results) => {
-				if (error) {
-					throw error;
-				}
-				response.end(
-					`Message added with Agent ID: ${id}, Data: ${data}, Structure: ${structure}`
-				);
-			}
-		);
+	if (Number.isNaN(parseInt(id))) {
+		console.log("Sending Agent ID is not a number.");
+		response.end(`Invalid Agent ID. Please enter a valid number.`);
 	} else {
-		// If the data structure is not 1 or 2, send an error message to the user.
-		response.end(
-			`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
-		);
+		// If the data structure ID entered by the user is 1 or 2, continue on with the function.
+		if (structure == 1 || structure == 2) {
+			// The $ are binding our id, name and course_id variables. $1 = user the first
+			// variable, $2 = use the second, etc. So $1 = id value, $2 = name value, etc.
+			pool.query(
+				"INSERT INTO secret.messages (agent_id, data, structure_id) VALUES ($1, $2, $3)",
+				[id, data, structure],
+				(error, results) => {
+					if (error) {
+						throw error;
+					}
+					response.end(
+						`Message added with Agent ID: ${id}, Data: ${data}, Structure: ${structure}`
+					);
+				}
+			);
+		} else {
+			// If the data structure is not 1 or 2, send an error message to the user.
+			response.end(
+				`Invalid Data Structure. Please enter 1 for stack or 2 for queue.`
+			);
+		}
 	}
 };
 
@@ -57,6 +62,11 @@ const getMessage = (request, response) => {
 	// This is grabbing the agent_id and structure_id columns from the request
 	const retrieving_agent_id = request.query.id;
 	const structure = parseInt(request.query.structure);
+
+	if (Number.isNaN(parseInt(retrieving_agent_id))) {
+		console.log("Sending Agent ID is not a number.");
+		response.end(`Invalid Agent ID. Please enter a valid number.`);
+	}
 
 	// Logging the input values to the console
 	console.log("\nRetrieving agent ID:", retrieving_agent_id);
