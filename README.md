@@ -34,13 +34,13 @@ Please note that when a new record is added to a certain data structure, it cann
    });
    ```
    
-2. Navigate to the main project folder using the command:
+2. To navigate to the main project folder, open the terminal and enter the command:
 
    ```
    cd sprint
    ```
    
-3. Next, install dependencies. In your terminal, enter the command:
+3. Next, install dependencies. Enter the command:
  
    ```
    npm install
