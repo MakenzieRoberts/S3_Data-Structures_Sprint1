@@ -4,7 +4,7 @@
  
 This is a group project for Sprint #1 (3nd Semester) at Keyin College's Software Development Program.  
 
-This project uses Node, Express, and PostgreSQL to create a web form that allows 'secret agents' to enter messages into a database, and retrieve messages using either a stack or queue.
+This project uses Node, Express, and PostgreSQL (with pgAdmin) to create a web form that allows 'secret agents' to enter messages into a database, and retrieve messages using either a stack or queue.
 
 ---
 
@@ -15,7 +15,7 @@ This project uses Node, Express, and PostgreSQL to create a web form that allows
 ### Setup
 
 
-1. Before you start the program, please note that you must first alter ```config.js``` to use your PostgreSQL credentials. It is currently using the         'default' credentials used for pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
+1. Before you start the program, please note that you must first alter ```config.js``` to use your credentials. It is currently using the 'default' credentials used for PostgreSQL/pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
 
    In ```config.js```, replace these user and password properties with your PostgreSQL credentials between the double quotes, and save the file.
    
