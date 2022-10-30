@@ -14,6 +14,10 @@ app.get("/", function (req, res) {
 	res.sendFile(path.join(__dirname, "./public/form.html"));
 });
 
+// !NOTE: The messages database will be empty when you first run the app. You will need to
+// add records to the messages table in order to test the app. This way, you can test the
+// stack and queue functions with your own data.
+
 // This function adds the record to the messages table. This function is executed when the
 // user submits a new message through the form.
 const addMessage = (request, response) => {
@@ -106,8 +110,13 @@ const getMessage = (request, response) => {
 			// empty. If the result is null, we send a response to the user that lets
 			// them know there was no data found in that structure.
 			if (result === null) {
-				console.log("No data found in structure 1");
-				response.end("No data found in structure 1.");
+				let structureType = structure === 1 ? "Stack" : "Queue";
+				console.log(
+					`No data found in structure ${structure} (${structureType}).`
+				);
+				response.end(
+					`No data found in structure ${structure} (${structureType}).`
+				);
 			} else {
 				// If the result is not null, and therefore contains data, we continue on
 				// and parse the data into a JSON object so we can access the properties
@@ -183,5 +192,8 @@ app.post("/add", addMessage);
 
 // Server listening on port 3000
 app.listen(3000, function () {
-	console.log("server is listening on port: 3000");
+	console.log("\nServer is listening on port: 3000");
+	console.log(
+		"\nThe messages database will be empty when you first run the app.\nYou will need to add records to the messages table in order to test the app.\nThis way, you can test the stack and queue functions with your own data.\n"
+	);
 });
