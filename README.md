@@ -17,7 +17,8 @@ Please note that when a new record is added to a certain data structure, it cann
 ### Setup
 
 1. First, the database needs to be restored locally. In pgAdmin, create a new database and restore it using the file ```Sprint1_Data-Structures_DB_Backup.sql```
-1. Before you start the program, please note that you must first alter ```config.js``` to use your credentials. It is currently using the 'default' credentials used for PostgreSQL/pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
+
+	Before you start the program, please note that you must first alter ```config.js``` to use your credentials. It is currently using the 'default' credentials used for PostgreSQL/pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
 
    In ```config.js```, replace these user and password properties with your PostgreSQL credentials between the double quotes, and save the file.
    
@@ -32,25 +33,32 @@ Please note that when a new record is added to a certain data structure, it cann
 	   port: 5432,
    });
    ```
+   
+2. Navigate to the main project folder using the command:
 
-2. Next, install dependencies. In your terminal, run this command:
+   ```
+   cd sprint
+   ```
+   
+3. Next, install dependencies. In your terminal, enter the command:
  
    ```
    npm install
    ```
  
-3. Next, to run the program and start the server, enter the command:
+4. Next, to run the program and start the server, enter the command:
 
    ```
    node app
    ```
-4. To view the web form, visit the local server in your browser with the URL:
+   
+5. To view the web form, visit the local server in your browser with the URL:
 
    ```
    http://localhost:3000/
    ```
    
-5. To exit, navigate to your terminal and press ```CTRL + C```.
+6. To stop the server, navigate to your terminal and press ```CTRL + C```.
 
 
 
