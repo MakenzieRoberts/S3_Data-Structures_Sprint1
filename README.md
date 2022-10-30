@@ -6,9 +6,11 @@ This is a group project for Sprint #1 (3nd Semester) at Keyin College's Software
 
 This project uses Node, Express, and PostgreSQL (with pgAdmin) to create a web form that allows 'secret agents' to enter messages into a database, and retrieve messages using either a stack or queue.
 
+Please note that when a new record is added to a certain data structure, it cannot be retrieved using a different one, as they represent different levels of urgency. The stack data structure (1) is used for urgent messages, and the queue data structure (2) is used for non-critical messages.
+
 ---
 
-**The messages database will be empty when you first run the app. You will need to add records to the messages table in order to test the app. This way, you can test the stack and queue functions with your own data.**
+**The messages database will be empty when you first run the app. You will need to add records to the messages table in order to test the app - This way, you can test the stack and queue functions with your own data. If there is no data to retrieve for a specified data structure, an error message will be returned to the user.**
 
 ---
 
