@@ -6,8 +6,14 @@ This is a group project for Sprint #1 (3nd Semester) at Keyin College's Software
 
 This project uses Node, Express, and PostgreSQL to create a web form that allows 'secret agents' to enter messages into a database, and retrieve messages using either a stack or queue.
 
+---
+
 **The messages database will be empty when you first run the app. You will need to add records to the messages table in order to test the app. This way, you can test the stack and queue functions with your own data.**
+
+---
+
 ### Setup
+
 
 1. Before you start the program, please note that you must first alter ```config.js``` to use your PostgreSQL credentials. It is currently using the         'default' credentials used for pgAdmin from our Database Programming and Processing class, so you'll most likely have to update the user and password properties.
 
@@ -19,8 +25,8 @@ This project uses Node, Express, and PostgreSQL to create a web form that allows
    const pool = new Pool({
 	   user: "<YOUR USERNAME>",
 	   host: "localhost",
-	   database: "<YOUR PASSWORD>",
-	   password: "Keyin2022",
+	   database: "data-structures-sprint1",
+	   password: "<YOUR PASSWORD>",
 	   port: 5432,
    });
    ```
